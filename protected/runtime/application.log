@@ -1,0 +1,100 @@
+2014/09/26 10:57:46 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 10:58:13 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 10:58:47 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 10:58:50 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:00:34 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:01:54 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:01:57 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:02:26 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:03:26 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
+2014/09/26 11:03:31 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not allowed to access this page.' in /shop/www/htdocs/blog.live/yii/framework/gii/GiiModule.php:170
+Stack trace:
+#0 /shop/www/htdocs/blog.live/yii/framework/web/CController.php(263): GiiModule->beforeControllerAction(Object(DefaultController), Object(CInlineAction))
+#1 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(282): CController->run('')
+#2 /shop/www/htdocs/blog.live/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('gii')
+#3 /shop/www/htdocs/blog.live/yii/framework/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /shop/www/htdocs/blog.live/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/index.php?r=gii
+---
