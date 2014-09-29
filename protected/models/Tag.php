@@ -24,16 +24,6 @@ class Tag extends CActiveRecord
 	}
 
 	/**
-	 * @param $tags - The string converted to an array.
-	 *
-	 * @return array - The newly created array.
-	 */
-	public static function string2array($tags)
-	{
-		return preg_split('/\s*,\s*/', trim($tags), -1, PREG_SPLIT_NO_EMPTY);
-	}
-
-	/**
 	 * @param $tags - The array that will be converted to string.
 	 *
 	 * @return string - The newly created string.
@@ -115,5 +105,59 @@ class Tag extends CActiveRecord
 			$this, array(
 				'criteria' => $criteria,
 			));
+	}
+
+	/**
+	 * @param $oldTags
+	 * @param $newTags
+	 */
+	public function updateFrequency($oldTags, $newTags)
+	{
+		$oldTags = self::string2array($oldTags);
+		$newTags = self::string2array($newTags);
+		$this->addTags(array_values(array_diff($newTags, $oldTags)));
+		$this->removeTags(array_values(array_diff($oldTags, $newTags)));
+	}
+
+	/**
+	 * @param $tags - The string converted to an array.
+	 *
+	 * @return array - The newly created array.
+	 */
+	public static function string2array($tags)
+	{
+		return preg_split('/\s*,\s*/', trim($tags), -1, PREG_SPLIT_NO_EMPTY);
+	}
+
+	/**
+	 * @param $tags
+	 */
+	public function addTags($tags)
+	{
+		$criteria = new CDbCriteria;
+		$criteria->addInCondition('name', $tags);
+		$this->updateCounters(array('frequency' => 1), $criteria);
+		foreach ($tags as $name) {
+			if (!$this->exists('name=:name', array(':name' => $name))) {
+				$tag = new Tag;
+				$tag->name = $name;
+				$tag->frequency = 1;
+				$tag->save();
+			}
+		}
+	}
+
+	/**
+	 * @param $tags
+	 */
+	public function removeTags($tags)
+	{
+		if (empty($tags)) {
+			return;
+		}
+		$criteria = new CDbCriteria;
+		$criteria->addInCondition('name', $tags);
+		$this->updateCounters(array('frequency' => -1), $criteria);
+		$this->deleteAll('frequency<=0');
 	}
 }
