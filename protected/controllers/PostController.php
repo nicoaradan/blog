@@ -7,6 +7,7 @@ class PostController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	private $_model;
 
 	/**
 	 * @return array action filters
@@ -49,11 +50,40 @@ class PostController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionView($id)
+	public function actionView()
 	{
+		$post = $this->loadModel();
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$post,
 		));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @return Post the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModel()
+	{
+		if ($this->_model === null)
+		{
+			if (isset($_GET['id']))
+			{
+				$condition = '';
+				if (Yii::app()->user->isGuest){
+					$condition = 'status=' . Post::STATUS_PUBLISHED . 'OR status=' . Post::STATUS_ARCHIVED;
+				}
+
+				$this->_model = Post::model()->findByPk($_GET['id'], $condition);
+
+				if ($this->_model === null)
+				{
+					throw new CHttpException(404, 'The requested page does not exist.');
+				}
+			}
+		}
+		return $this->_model;
 	}
 
 	/**
@@ -122,7 +152,20 @@ class PostController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Post');
+		$criteria = new CDbCriteria(array(
+			'condition' => 'status=' . Post::STATUS_PUBLISHED,
+			'order' => 'update_time DESC',
+			'with' => 'commentCount'
+		));
+		if (isset($_GET['tag']))
+			$criteria->addSearchCondition('tags', $_GET['tag']);
+
+		$dataProvider = new CActiveDataProvider('Post', array(
+			'pagination' => array(
+				'pageSize' => 5
+			),
+			'criteria' => $criteria
+		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -141,21 +184,6 @@ class PostController extends Controller
 		$this->render('admin',array(
 			'model'=>$model,
 		));
-	}
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Post the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadModel($id)
-	{
-		$model=Post::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
 	}
 
 	/**
