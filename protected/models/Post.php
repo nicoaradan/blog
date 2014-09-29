@@ -143,6 +143,10 @@ class Post extends CActiveRecord
 			));
 	}
 
+	/**
+	 * @param $attribute
+	 * @param $params
+	 */
 	public function normalizeTags($attribute, $params)
 	{
 		$this->tags = Tag::array2string(array_unique(Tag::string2array($this->tags)));
