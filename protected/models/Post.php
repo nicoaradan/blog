@@ -22,6 +22,7 @@ class Post extends CActiveRecord
 	const STATUS_DRAFT = 1;
 	const STATUS_PUBLISHED = 2;
 	const STATUS_ARCHIVED = 3;
+	private $_oldTags;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -52,15 +53,20 @@ class Post extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content, status, create_time', 'required'),
-			array('status', 'numerical', 'integerOnly' => true, 'in', 'range' => array(1, 2, 3)),
+			array('content, status', 'required'),
+			array('status', 'numerical', 'integerOnly' => true,),
+			array('status', 'in', 'range' => array(1, 2, 3)),
 			array('title', 'length', 'max' => 200),
 			array(
 				'tags',
 				'length',
 				'max' => 100,
-				'pattern' => '/^[\w\s,]+$/',
 				'message' => 'Tags can only contain word characters.'
+			),
+			array(
+				'tags',
+				'match',
+				'pattern' => '/^[\w\s,]+$/'
 			),
 			array('tags', 'normalizeTags'),
 			array('update_time', 'safe'),
@@ -162,5 +168,35 @@ class Post extends CActiveRecord
 				'id' => $this->id,
 				'title' => $this->title,
 			));
+	}
+
+	protected function beforeSave()
+	{
+		if (parent::beforeSave()) {
+			if ($this->isNewRecord) {
+				$this->create_time = $this->update_time = time();
+				$this->author_id = Yii::app()->id;
+			}
+			else {
+				$this->update_time = time();
+			}
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected function afterSave()
+	{
+		parent::afterSave();
+		Tag::model()->updateFrequency($this->_oldTags, $this->tags);
+	}
+
+	protected function afterFind()
+	{
+		parent::afterFind();
+		$this->_oldTags = $this->tags;
 	}
 }
