@@ -174,7 +174,11 @@ class Post extends CActiveRecord
 	{
 		if (parent::beforeSave()) {
 			if ($this->isNewRecord) {
-				$this->create_time = $this->update_time = time();
+
+				$time = new DateTime();
+				$time->getTimestamp();
+
+				$this->update_time = $time->getTimestamp();
 				$this->author_id = Yii::app()->id;
 			}
 			else {

@@ -38,7 +38,7 @@ class PostController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users' => array('demo'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -197,5 +197,12 @@ class PostController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	protected function afterDelete()
+	{
+		parent::afterDelete();
+		Comment::model()->deleteAll('post_id=', $this->id);
+		Tag::model()->updateFrequency($this->tags, '');
 	}
 }

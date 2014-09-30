@@ -45,15 +45,21 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'id',
-		'title',
-		'content',
-		'tags',
-		'status',
-		'create_time',
-		/*
-		'update_time',
-		*/
+		array(
+			'name' => 'title',
+			'type' => 'raw',
+			'value' => 'CHtml::link(CHtml::encode($data->title), $data->url)'
+		),
+		array(
+			'name' => 'status',
+			'value' => 'Lookup::item("PostStatus",$data->status)',
+			'filter' => Lookup::items('PostStatus'),
+		),
+		array(
+			'name' => 'create_time',
+			'type' => 'datetime',
+			'filter' => false
+		),
 		array(
 			'class'=>'CButtonColumn',
 		),
