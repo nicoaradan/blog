@@ -49,14 +49,16 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content, status, create_time', 'required'),
+			array('content, author, email', 'required'),
 			array('status', 'numerical', 'integerOnly' => true),
 			array('author', 'length', 'max' => 50),
 			array('email', 'length', 'max' => 100),
 			array('url', 'length', 'max' => 200),
+			array('url', 'url'),
+			array('email', 'email'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, content, status, create_time, author, email, url', 'safe', 'on' => 'search'),
+			array('status, author, email', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -84,7 +86,8 @@ class Comment extends CActiveRecord
 			'create_time' => 'Create Time',
 			'author' => 'Author',
 			'email' => 'Email',
-			'url' => 'Url',
+			'url' => 'Website',
+			'post_id' => 'Post'
 		);
 	}
 
@@ -118,5 +121,22 @@ class Comment extends CActiveRecord
 			$this, array(
 				'criteria' => $criteria,
 			));
+	}
+
+	/**
+	 * @return bool
+	 */
+	protected function beforeSave()
+	{
+		if (parent::BeforeSave()) {
+			if ($this->isNewRecord) {
+				$this->create_time = time();
+			}
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
