@@ -123,6 +123,27 @@ class Comment extends CActiveRecord
 			));
 	}
 
+	public function approve()
+	{
+		$this->status = Comment::STATUS_APPROVED;
+		$this->update(array('status'));
+	}
+
+	/**
+	 * @param Post the post that this comment belongs to. If null, the method
+	 * will query for the post.
+	 *
+	 * @return string the permalink URL for this comment
+	 */
+	public function getUrl($post = null)
+	{
+		if ($post === null) {
+			$post = $this->post;
+		}
+
+		return $post->url . '#c' . $this->id;
+	}
+
 	/**
 	 * @return bool
 	 */

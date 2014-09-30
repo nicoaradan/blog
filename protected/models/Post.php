@@ -89,8 +89,8 @@ class Post extends CActiveRecord
 				self::HAS_MANY,
 				'Comment',
 				'post_id',
-				'condition' => 'comments.status=' . Comment::STATUS_APPROVED,
-				'order' => 'comments.create_time DESC'
+				'condition' => 'comment.status=' . Comment::STATUS_APPROVED,
+				'order' => 'comment.create_time DESC'
 			),
 			'commentCount' => array(
 				self::STAT,
@@ -168,6 +168,20 @@ class Post extends CActiveRecord
 				'id' => $this->id,
 				'title' => $this->title,
 			));
+	}
+
+	public function addComment($comment)
+	{
+		if (Yii::app()->params['commentNeedApproval']) {
+			$comment->status = Comment::STATUS_PENDING;
+		}
+		else {
+			$comment->status = Comment::STATUS_APPROVED;
+		}
+
+		$comment->post_id = $this->id;
+
+		return $comment->save();
 	}
 
 	protected function beforeSave()

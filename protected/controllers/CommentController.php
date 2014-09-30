@@ -7,6 +7,7 @@ class CommentController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	private $_model;
 
 	/**
 	 * @return array action filters
@@ -54,6 +55,27 @@ class CommentController extends Controller
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @return Comment the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModel()
+	{
+		if ($this->_model === null)
+		{
+			if (isset($_GET['id']))
+			{
+				$this->_model = Comment::model()->findByPk($_GET['id']);
+				if($this->_model === null)
+					throw new CHttpException(404,'The requested page does not exist.');
+				return $this->_model;
+			}
+		}
+		return $this->_model;
 	}
 
 	/**
@@ -122,7 +144,13 @@ class CommentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Comment');
+		$dataProvider=new CActiveDataProvider('Comment',array(
+			'criteria' => array(
+				'with' => 'post',
+				'order' => 't.status, t.create_time DESC'
+			)
+		));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -144,18 +172,19 @@ class CommentController extends Controller
 	}
 
 	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer $id the ID of the model to be loaded
-	 * @return Comment the loaded model
+	 * Approve the comment.
 	 * @throws CHttpException
 	 */
-	public function loadModel($id)
+	public function actionApprove()
 	{
-		$model=Comment::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
+		if (Yii::app()->request->isPostRequest)
+		{
+			$comment = $this->loadModel();
+			$comment->approve();
+			$this->redirect(array('index'));
+		}
+		else
+			throw new CHttpException(400, 'Invalid request');
 	}
 
 	/**

@@ -40,7 +40,7 @@ $this->menu=array(
 		<?php $this->renderPartial(
 			'_comments', array(
 				'post' => $model,
-				'comments' => $model->comment
+				'comment' => $comment
 			)); ?>
 	<?php endif; ?>
 
