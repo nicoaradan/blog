@@ -1,3 +1,4 @@
+<?php foreach ($comments as $comment): ?>
 <div class="comment" id="c<?php $comment->id; ?>">
 
 	<?php echo CHtml::link(
@@ -18,3 +19,4 @@
 		<?php echo nl2br(CHtml::encode($comment->content)); ?>
 	</div>
 </div>
+<?php endforeach; ?>

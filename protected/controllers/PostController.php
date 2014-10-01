@@ -53,11 +53,11 @@ class PostController extends Controller
 	public function actionView()
 	{
 		$post = $this->loadModel();
-		$comment = $this->newComment($post);
+		$comments = $this->getComments($post);
 
 		$this->render('view',array(
 			'model' => $post,
-			'comment' => $comment
+			'comments' => $comments
 		));
 	}
 
@@ -75,7 +75,7 @@ class PostController extends Controller
 			{
 				$condition = '';
 				if (Yii::app()->user->isGuest){
-					$condition = 'status=' . Post::STATUS_PUBLISHED . 'OR status=' . Post::STATUS_ARCHIVED;
+					$condition = 'status=' . Post::STATUS_PUBLISHED . ' OR status=' . Post::STATUS_ARCHIVED;
 				}
 
 				$this->_model = Post::model()->findByPk($_GET['id'], $condition);
@@ -89,9 +89,10 @@ class PostController extends Controller
 		return $this->_model;
 	}
 
-	protected function newComment($post)
+	protected function getComments($post)
 	{
 		$comment = new Comment;
+
 
 		if (isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form') {
 			echo CActiveForm::validate($comment);
@@ -108,6 +109,11 @@ class PostController extends Controller
 				}
 				$this->refresh();
 			}
+			$comment = array($comment);
+
+		}
+		else {
+			$comment = Comment::model()->findAll('id', array($post->id));
 		}
 
 		return $comment;
