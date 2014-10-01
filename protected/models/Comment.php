@@ -70,7 +70,7 @@ class Comment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'id0' => array(self::BELONGS_TO, 'Post', 'id'),
+			'post' => array(self::BELONGS_TO, 'Post', 'id'),
 		);
 	}
 
@@ -154,7 +154,6 @@ class Comment extends CActiveRecord
 				$time = new DateTime();
 				$this->create_time = $time->date;
 			}
-
 			return true;
 		}
 		else {
