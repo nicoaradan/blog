@@ -52,7 +52,7 @@ $this->menu=array(
 	<?php else: ?>
 		<?php $this->renderPartial(
 			'/comment/_form', array(
-				'model' => $comments
+				'model' => new Comment()
 			)); ?>
 
 	<?php endif; ?>
