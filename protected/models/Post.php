@@ -187,17 +187,14 @@ class Post extends CActiveRecord
 	protected function beforeSave()
 	{
 		if (parent::beforeSave()) {
+
+			$time = new DateTime();
+
 			if ($this->isNewRecord) {
-
-				$time = new DateTime();
-				$time->getTimestamp();
-
-				$this->update_time = $time->getTimestamp();
 				$this->author_id = Yii::app()->id;
 			}
-			else {
-				$this->update_time = time();
-			}
+
+			$this->update_time = $time->date;
 
 			return true;
 		}

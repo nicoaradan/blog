@@ -151,7 +151,8 @@ class Comment extends CActiveRecord
 	{
 		if (parent::BeforeSave()) {
 			if ($this->isNewRecord) {
-				$this->create_time = time();
+				$time = new DateTime();
+				$this->create_time = $time->date;
 			}
 
 			return true;
