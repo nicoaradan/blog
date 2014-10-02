@@ -70,7 +70,7 @@ class Comment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'post' => array(self::BELONGS_TO, 'Post', 'id'),
+			'post' => array(self::BELONGS_TO, 'Post', 'post_id')
 		);
 	}
 
@@ -142,6 +142,36 @@ class Comment extends CActiveRecord
 		}
 
 		return $post->url . '#c' . $this->id;
+	}
+
+	/**
+	 * Retrieve the first 10 comments that are approved.
+	 *
+	 * @param int $limit
+	 *
+	 * @return array|CActiveRecord|CActiveRecord[]|mixed|null
+	 */
+	public function findRecentComments($limit = 10)
+	{
+		return $this->with('post')->findAll(
+			array(
+				'condition' => 't.status=' . self::STATUS_APPROVED,
+				'order' => 't.create_time DESC',
+				'limit' => $limit
+			));
+	}
+
+	/**
+	 * @return string the hyperlink display for the current comment's author
+	 */
+	public function getAuthorLink()
+	{
+		if (!empty($this->url)) {
+			return CHtml::link(CHtml::encode($this->author), $this->url);
+		}
+		else {
+			return CHtml::encode($this->author);
+		}
 	}
 
 	/**

@@ -20,6 +20,16 @@
 		$this->widget('UserMenu');
 	}
 
+	$this->widget(
+		'TagCloud', array(
+			'maxTags' => Yii::app()->params['tagCloudCount']
+		));
+
+	$this->widget(
+		'RecentComments', array(
+			'maxComments' => Yii::app()->params['maxComments']
+		));
+
 		$this->endWidget();
 	?>
 	</div><!-- sidebar -->
