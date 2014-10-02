@@ -15,6 +15,11 @@
 			'items'=>$this->menu,
 			'htmlOptions'=>array('class'=>'operations'),
 		));
+
+	if (!Yii::app()->user->isGuest) {
+		$this->widget('UserMenu');
+	}
+
 		$this->endWidget();
 	?>
 	</div><!-- sidebar -->
