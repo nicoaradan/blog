@@ -84,4 +84,5 @@ return array(
 		'tagCloudCount' => 20,
 		'maxComments' => 10
 	),
+	'defaultController' => 'post'
 );
