@@ -13,6 +13,9 @@ class CommentTest extends CDbTestCase
 		'comments' => 'Comment'
 	);
 
+	/**
+	 * @covers Comment::approve
+	 */
 	public function testApprove()
 	{
 		$comment = new Comment();
