@@ -23,7 +23,10 @@ $this->menu=array(
 	'attributes'=>array(
 		'id',
 		'content',
-		'status',
+        array(
+            'name' => 'status',
+            'value' => $model->statusValue->name
+        ),
 		'create_time',
 		'author',
 		'email',
