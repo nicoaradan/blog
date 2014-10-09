@@ -34,5 +34,5 @@ $this->menu=array(
 	),
 )); ?>
 <div id="comments">
-    <?php echo CHtml::link('Approve', Yii::app()->createUrl('/comment/approve')); ?>
+    <?php echo CHtml::link('Approve', Yii::app()->createUrl('/comment/approve', array('id' => $model->id))); ?>
 </div>

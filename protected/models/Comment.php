@@ -124,6 +124,11 @@ class Comment extends CActiveRecord
 			));
 	}
 
+    /**
+     * Change the status of the @see Comment to @see Comment::STATUS_APPROVED.
+     *
+     * @throws CDbException
+     */
 	public function approve()
 	{
 		$this->status = Comment::STATUS_APPROVED;
