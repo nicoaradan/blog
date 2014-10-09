@@ -145,7 +145,7 @@ class PostController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Post;
+        $model = new Post();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -154,7 +154,7 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                $this->redirect(array('view', 'id' => $model->id_tbl_post));
 		}
 
 		$this->render('create',array(
@@ -206,7 +206,7 @@ class PostController extends Controller
 	public function actionIndex()
 	{
 		$criteria = new CDbCriteria(array(
-			'condition' => 'status=' . Post::STATUS_PUBLISHED,
+            //'condition' => 'status=' . Post::STATUS_PUBLISHED,
 			'order' => 'update_time DESC',
 			'with' => 'commentCount'
 		));

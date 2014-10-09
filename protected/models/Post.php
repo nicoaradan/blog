@@ -185,7 +185,7 @@ class Post extends CActiveRecord
 			$comment->status = Comment::STATUS_APPROVED;
 		}
 
-		$comment->post_id = $this->id;
+        $comment->post_id = $this->id_tbl_post;
 
 		return $comment->save();
 	}
@@ -197,7 +197,7 @@ class Post extends CActiveRecord
 			$time = new DateTime();
 
 			if ($this->isNewRecord) {
-				$this->author_id = Yii::app()->id;
+                $this->fk_tbl_user = Yii::app()->id;
 			}
 
 			$this->update_time = $time->date;
