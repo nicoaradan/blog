@@ -1,4 +1,5 @@
 <?php foreach ($comments as $comment): ?>
+    <?php if ($comment->post_id == $post->id_tbl_post): ?>
 <div class="comment" id="c<?php $comment->id; ?>">
 
 	<?php echo CHtml::link(
@@ -19,4 +20,5 @@
         <?php echo htmlentities($comment->content); ?>
 	</div>
 </div>
+    <?php endif; ?>
 <?php endforeach; ?>
