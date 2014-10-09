@@ -52,8 +52,8 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 		array(
 			'name' => 'status',
-			'value' => 'Lookup::item("PostStatus",$data->status)',
-			'filter' => Lookup::items('PostStatus'),
+            'value' => 'Lookup::item("Status",$data->status)',
+            'filter' => Lookup::items('Status'),
 		),
 		array(
 			'name' => 'create_time',
