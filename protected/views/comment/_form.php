@@ -26,18 +26,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status'); ?>
-        <?php echo $form->dropDownList($model, 'status', Lookup::items('Status')); ?>
-		<?php echo $form->error($model,'status'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'create_time'); ?>
-		<?php echo $form->textField($model,'create_time'); ?>
-		<?php echo $form->error($model,'create_time'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'author'); ?>
