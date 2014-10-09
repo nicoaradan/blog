@@ -37,7 +37,7 @@ class CommentController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+                'actions' => array('admin', 'delete', 'approve'),
 				'users' => array('demo'),
 			),
 			array('deny',  // deny all users
@@ -57,21 +57,23 @@ class CommentController extends Controller
 		));
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @return Comment the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadModel()
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     *
+     * @param $id - The id of the Comment.
+     *
+     * @throws CHttpException
+     * @return Comment the loaded model
+     */
+    public function loadModel($id)
 	{
-		if ($this->_model === null)
-		{
-			if (isset($_GET['id']))
-			{
-				$this->_model = Comment::model()->findByPk($_GET['id']);
-				if($this->_model === null)
-					throw new CHttpException(404,'The requested page does not exist.');
+        if ($this->_model === null) {
+            if (isset($id)) {
+                $this->_model = Comment::model()->findByPk($id);
+                if ($this->_model === null) {
+                    throw new CHttpException(404, 'The requested page does not exist.');
+                }
 				return $this->_model;
 			}
 		}
@@ -171,15 +173,18 @@ class CommentController extends Controller
 		));
 	}
 
-	/**
-	 * Approve the comment.
-	 * @throws CHttpException
-	 */
-	public function actionApprove()
+    /**
+     * Approve the comment.
+     *
+     * @param $id - Comment id.
+     *
+     * @throws CHttpException
+     */
+    public function actionApprove($id)
 	{
 		if (Yii::app()->request->isPostRequest)
 		{
-			$comment = $this->loadModel();
+            $comment = $this->loadModel($id);
 			$comment->approve();
 			$this->redirect(array('index'));
 		}

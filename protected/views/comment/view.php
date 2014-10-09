@@ -31,15 +31,5 @@ $this->menu=array(
 	),
 )); ?>
 <div id="comments">
-	<?php if ($model->commentCount >= 1): ?>
-		<h3>
-			<?php echo $model->commentCount . 'comment(s)'; ?>
-		</h3>
-
-		<?php $this->renderPartial(
-			'_comments', array(
-				'post' => $model,
-				'comments' => $model->comments,
-			)); ?>
-	<?php endif; ?>
+    <?php echo CHtml::link('Approve', Yii::app()->createUrl('/comment/approve')); ?>
 </div>

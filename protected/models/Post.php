@@ -84,7 +84,7 @@ class Post extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'author' => array(self::BELONGS_TO, 'User', 'author_id'),
+            'author' => array(self::BELONGS_TO, 'User', 'id'),
 			'comment' => array(
 				self::HAS_MANY,
 				'Comment',
@@ -107,7 +107,7 @@ class Post extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
+            'id_tbl_post' => 'ID',
 			'title' => 'Title',
 			'content' => 'Content',
 			'tags' => 'Tags',
@@ -135,7 +135,7 @@ class Post extends CActiveRecord
 
 		$criteria = new CDbCriteria;
 
-		$criteria->compare('id', $this->id, true);
+        $criteria->compare('id_tbl_post', $this->id_tbl_post, true);
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('content', $this->content, true);
 		$criteria->compare('tags', $this->tags, true);
@@ -165,11 +165,16 @@ class Post extends CActiveRecord
 	{
 		return Yii::app()->createUrl(
 			'post/view', array(
-				'id' => $this->id,
+                'id' => $this->id_tbl_post,
 				'title' => $this->title,
 			));
 	}
 
+    /**
+     * @param $comment
+     *
+     * @return mixed
+     */
 	public function addComment($comment)
 	{
 		if (Yii::app()->params['commentNeedApproval']) {

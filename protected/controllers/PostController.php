@@ -46,38 +46,53 @@ class PostController extends Controller
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 */
-	public function actionView()
+    /**
+     * Displays a particular model.
+     *
+     * @param $id - The id of the Post.
+     *
+     * @throws CHttpException
+     * @throws Exception
+     */
+    public function actionView($id)
 	{
-		$post = $this->loadModel();
-		$comments = $this->getComments($post);
+        if (!empty($id)) {
+            $post = $this->loadModel($id);
 
-		$this->render('view',array(
-			'model' => $post,
-			'comments' => $comments
-		));
+            $comments = $this->getComments($post);
+
+            $this->render(
+                'view', array(
+                    'model' => $post,
+                    'comments' => $comments
+                ));
+
+        } else {
+            throw new Exception('Post with not found');
+        }
 	}
 
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @return Post the loaded model
-	 * @throws CHttpException
-	 */
-	public function loadModel()
+    /**
+     * Returns the data model based on the primary key given in the GET variable.
+     * If the data model is not found, an HTTP exception will be raised.
+     *
+     * @param $id - Id of the Post.
+     *
+     * @throws CHttpException
+     * @return Post the loaded model
+     */
+    public function loadModel($id)
 	{
 		if ($this->_model === null)
 		{
-			if (isset($_GET['id']))
+            if (isset($id))
 			{
 				$condition = '';
 				if (Yii::app()->user->isGuest){
 					$condition = 'status=' . Post::STATUS_PUBLISHED . ' OR status=' . Post::STATUS_ARCHIVED;
 				}
 
-				$this->_model = Post::model()->findByPk($_GET['id'], $condition);
+                $this->_model = Post::model()->findByPk($id, $condition);
 
 				if ($this->_model === null)
 				{
@@ -88,9 +103,15 @@ class PostController extends Controller
 		return $this->_model;
 	}
 
+    /**
+     * @param $post
+     * TODO - creation of the comments.
+     *
+     * @return array|CActiveRecord|CActiveRecord[]|Comment|mixed|null
+     */
 	protected function getComments($post)
 	{
-		$comment = new Comment;
+        $comment = new Comment();
 
 
 		if (isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form') {
@@ -109,10 +130,10 @@ class PostController extends Controller
 				$this->refresh();
 			}
 			$comment = array($comment);
-
+            // TODO - better separation of information between entities.
 		}
 		else {
-			$comment = Comment::model()->findAll('id', array($post->id));
+            $comment = Comment::model()->findAll('post_id', array($post->id_tbl_post));
 		}
 
 		return $comment;

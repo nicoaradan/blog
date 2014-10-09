@@ -12,8 +12,8 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id',array('size'=>11,'maxlength'=>11)); ?>
+        <?php echo $form->label($model, 'id_tbl_post'); ?>
+        <?php echo $form->textField($model, 'id_tbl_post', array('size' => 11, 'maxlength' => 11)); ?>
 	</div>
 
 	<div class="row">
