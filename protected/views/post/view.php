@@ -23,7 +23,9 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Post #<?php echo $model->id_tbl_post; ?></h1>
+<h1>View Post #<?php echo $model->id_tbl_post . ' ' . $model->title; ?></h1>
+
+
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
@@ -32,7 +34,10 @@ $this->menu=array(
 		'title',
 		'content',
 		'tags',
-		'status',
+        array(
+            'name' => 'status',
+            'value' => $model->mapStatus->name
+        ),
 		'create_time',
 		'update_time',
 	),

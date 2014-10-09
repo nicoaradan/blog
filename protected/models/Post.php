@@ -97,7 +97,8 @@ class Post extends CActiveRecord
 				'Comment',
 				'post_id',
 				'condition' => 'status=' . Comment::STATUS_APPROVED
-			)
+            ),
+            'mapStatus' => array(self::BELONGS_TO, 'Lookup', 'status')
 		);
 	}
 
