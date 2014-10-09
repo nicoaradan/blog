@@ -205,11 +205,16 @@ class PostController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$criteria = new CDbCriteria(array(
-            //'condition' => 'status=' . Post::STATUS_PUBLISHED,
-			'order' => 'update_time DESC',
-			'with' => 'commentCount'
-		));
+        $conditions = array(
+            'order' => 'update_time DESC',
+            'with' => 'commentCount'
+        );
+
+        if (!(Yii::app()->user->name == 'demo')) {
+            $conditions['condition'] = 'status=' . Post::STATUS_PUBLISHED;
+        }
+
+        $criteria = new CDbCriteria($conditions);
 		if (isset($_GET['tag']))
 			$criteria->addSearchCondition('tags', $_GET['tag']);
 
