@@ -4,7 +4,7 @@
  * This is the model class for table "{{post}}".
  *
  * The followings are the available columns in table '{{post}}':
- * @property string $id
+ * @property string $id_tbl_post
  * @property string $title
  * @property string $content
  * @property string $tags
