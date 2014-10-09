@@ -194,14 +194,11 @@ class Post extends CActiveRecord
 	{
 		if (parent::beforeSave()) {
 
-			$time = new DateTime();
-
 			if ($this->isNewRecord) {
                 $this->fk_tbl_user = Yii::app()->id;
 			}
 
-			$this->update_time = $time->date;
-
+            $this->update_time = date('Y-m-d h:m:s');
 			return true;
 		}
 		else {
