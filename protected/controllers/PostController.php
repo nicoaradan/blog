@@ -178,7 +178,7 @@ class PostController extends Controller
 		{
 			$model->attributes=$_POST['Post'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                $this->redirect(array('view', 'id' => $model->id_tbl_post));
 		}
 
 		$this->render('update',array(
