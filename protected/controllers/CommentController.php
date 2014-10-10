@@ -91,15 +91,20 @@ class CommentController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Comment;
+        $model = new Comment();
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
+        $post = Yii::app()->request->getPost('Post');
+
         if (isset($_POST['Comment'])) {
             $model->attributes = $_POST['Comment'];
+
+            $model->post_id = $post['id_tbl_post'];
+
             if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->id));
+                $this->redirect(Yii::app()->createUrl('post/view', array('id' => $post['id_tbl_post'])));
             }
         }
 

@@ -64,7 +64,8 @@ $this->menu=array(
 	<?php else: ?>
 		<?php $this->renderPartial(
 			'/comment/_form', array(
-				'model' => new Comment()
+                'model' => new Comment(),
+                'post' => $model
 			)); ?>
 
 	<?php endif; ?>

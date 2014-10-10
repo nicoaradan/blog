@@ -12,7 +12,8 @@
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation' => true,
+    'enableAjaxValidation' => false,
+    'action' => array('Comment/Create'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -42,6 +43,12 @@
 		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>200)); ?>
 		<?php echo $form->error($model,'url'); ?>
 	</div>
+
+    <?php
+    if (isset($post)) {
+        echo $form->hiddenField($post, 'id_tbl_post');
+    }
+    ?>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

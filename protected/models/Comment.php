@@ -187,8 +187,8 @@ class Comment extends CActiveRecord
 	{
 		if (parent::BeforeSave()) {
 			if ($this->isNewRecord) {
-				$time = new DateTime();
-				$this->create_time = $time->date;
+                $this->create_time = date('Y-m-d h:m:s');
+                $this->status      = 1;
 			}
 			return true;
 		}
