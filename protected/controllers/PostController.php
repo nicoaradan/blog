@@ -68,7 +68,7 @@ class PostController extends Controller
                 ));
 
         } else {
-            throw new Exception('Post with not found');
+            throw new Exception('Post not found');
         }
 	}
 
@@ -96,7 +96,7 @@ class PostController extends Controller
 
 				if ($this->_model === null)
 				{
-					throw new CHttpException(404, 'The requested page does not exist.');
+                    throw new CHttpException(404, 'Post not found');
 				}
 			}
 		}
