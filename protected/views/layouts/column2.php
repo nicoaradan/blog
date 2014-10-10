@@ -31,6 +31,12 @@
                     'maxComments' => Yii::app()->params['maxComments']
                 ));
 
+            $this->widget(
+                'ArchivedPostPortlet', array(
+                    'limit' => 10
+                )
+            );
+
             $this->endWidget();
             ?>
         </div>
