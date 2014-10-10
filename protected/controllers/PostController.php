@@ -105,37 +105,12 @@ class PostController extends Controller
 
     /**
      * @param $post
-     * TODO - creation of the comments.
      *
      * @return array|CActiveRecord|CActiveRecord[]|Comment|mixed|null
      */
 	protected function getComments($post)
 	{
-        $comment = new Comment();
-
-
-		if (isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form') {
-			echo CActiveForm::validate($comment);
-			Yii::app()->end();
-		}
-
-		if (isset($_POST['Comment'])) {
-			$comment->attributes = $_POST['Comment'];
-			if ($post->addComment($comment)) {
-				if ($comment->status == Comment::STATUS_PENDING) {
-					Yii::app()->user->setFlash(
-						'commentSubmitted',
-						'Thank you for your comment. Your comment will be posted once it is approved.');
-				}
-				$this->refresh();
-			}
-			$comment = array($comment);
-            // TODO - better separation of information between entities.
-		}
-		else {
-            $comment = Comment::model()->findAll('post_id', array($post->id_tbl_post));
-		}
-
+        $comment = Comment::model()->findAll('post_id', array($post->id_tbl_post));
 		return $comment;
 	}
 

@@ -171,25 +171,6 @@ class Post extends CActiveRecord
 			));
 	}
 
-    /**
-     * @param $comment
-     *
-     * @return mixed
-     */
-	public function addComment($comment)
-	{
-		if (Yii::app()->params['commentNeedApproval']) {
-			$comment->status = Comment::STATUS_PENDING;
-		}
-		else {
-			$comment->status = Comment::STATUS_APPROVED;
-		}
-
-        $comment->post_id = $this->id_tbl_post;
-
-		return $comment->save();
-	}
-
 	protected function beforeSave()
 	{
 		if (parent::beforeSave()) {
