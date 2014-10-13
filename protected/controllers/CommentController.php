@@ -34,6 +34,12 @@ class CommentController extends Controller
                 'users' => array('*'),
             ),
             array(
+                'allow', // allow all users to perform create action on comments
+                'actions' => array('create'),
+                'controllers' => array('Comment'),
+                'users' => array('*')
+            ),
+            array(
                 'allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update'),
                 'users' => array('@'),
