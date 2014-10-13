@@ -7,17 +7,18 @@
  */
 class UserIdentity extends CUserIdentity
 {
-	private $_id;
-	/**
-	 * Authenticates a user.
-	 * The example implementation makes sure if the username and password
-	 * are both 'demo'.
-	 * In practical applications, this should be changed to authenticate
-	 * against some persistent user identity storage (e.g. database).
-	 * @return boolean whether authentication succeeds.
-	 */
-	public function authenticate()
-	{
+    private $_id;
+
+    /**
+     * Authenticates a user.
+     * The example implementation makes sure if the username and password
+     * are both 'demo'.
+     * In practical applications, this should be changed to authenticate
+     * against some persistent user identity storage (e.g. database).
+     * @return boolean whether authentication succeeds.
+     */
+    public function authenticate()
+    {
 //		$users=array(
 //			// username => password
 //			'demo'=>'demo',
@@ -32,33 +33,31 @@ class UserIdentity extends CUserIdentity
 //			$this->errorCode=self::ERROR_NONE;
 //		return !$this->errorCode;
 
-		$username = strtolower($this->username);
-		$user = User::model()->find('LOWER(username)=?', array($username));
-		if ($user == null)
-		{
-			$this->errorCode = self::ERROR_USERNAME_INVALID;
-		}else if(!$user->validatePassword($this->password))
-		{
-			$this->errorCode = self::ERROR_PASSWORD_INVALID;
-		}
-		else
-		{
-			$this->_id = $user->id;
-			$this->username = $user->username;
-			$this->errorCode = self::ERROR_NONE;
-		}
+        $username = strtolower($this->username);
+        $user     = User::model()->find('LOWER(username)=?', array($username));
+        if ($user == null) {
+            $this->errorCode = self::ERROR_USERNAME_INVALID;
+        } else {
+            if (!$user->validatePassword($this->password)) {
+                $this->errorCode = self::ERROR_PASSWORD_INVALID;
+            } else {
+                $this->_id       = $user->id;
+                $this->username  = $user->username;
+                $this->errorCode = self::ERROR_NONE;
+            }
+        }
 
-		return $this->errorCode == self::ERROR_NONE;
-	}
+        return $this->errorCode == self::ERROR_NONE;
+    }
 
-	/**
-	 * Returns the unique identifier for the identity.
-	 * The default implementation simply returns {@link username}.
-	 * This method is required by {@link IUserIdentity}.
-	 * @return string the unique identifier for the identity.
-	 */
-	public function getId()
-	{
-		return $this->_id;
-	}
+    /**
+     * Returns the unique identifier for the identity.
+     * The default implementation simply returns {@link username}.
+     * This method is required by {@link IUserIdentity}.
+     * @return string the unique identifier for the identity.
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
 }
