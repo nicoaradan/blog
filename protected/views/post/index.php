@@ -7,9 +7,13 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create Post', 'url'=>array('create')),
-	array('label'=>'Manage Post', 'url'=>array('admin')),
+    array('label' => 'Create Post', 'url' => array('create'))
 );
+
+if (Yii::app()->user->name == 'demo') {
+    array_push($this->menu, array('label' => 'Manage Post', 'url' => array('admin')));
+}
+
 ?>
 
 <h1>Posts</h1>

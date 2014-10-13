@@ -8,8 +8,15 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'List Post', 'url'=>array('index')),
-	array('label'=>'Manage Post', 'url'=>array('admin')),
+    array('label' => 'List Post', 'url' => array('index'))
+);
+
+if (Yii::app()->user->name == 'demo') {
+    array_push($this->menu, array('label' => 'Manage Post', 'url' => array('admin')));
+}
+
+$this->menu = array(
+    array('label' => 'List Post', 'url' => array('index'))
 );
 ?>
 
