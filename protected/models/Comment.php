@@ -11,6 +11,8 @@
  * @property string $author
  * @property string $email
  * @property string $url
+ * @property Post   $post,
+ * @property string statusValue
  *
  * The followings are the available model relations:
  * @property Post $id0
