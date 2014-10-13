@@ -11,15 +11,15 @@
                 ));?>
 
             <div class="author">
-                <?php echo htmlentities($comment->author); ?>
+                <?php echo CHtml::encode($comment->author); ?>
             </div>
 
             <div class="time">
-                <?php echo htmlentities($comment->create_time); ?>
+                <?php echo CHtml::encode($comment->create_time); ?>
             </div>
 
             <div class="content">
-                <?php echo htmlentities($comment->content); ?>
+                <?php echo CHtml::encode($comment->content); ?>
             </div>
         </div>
     <?php endif; ?>
