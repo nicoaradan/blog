@@ -5,7 +5,7 @@
         <div class="comment" id="c<?php $comment->id; ?>">
 
             <?php echo CHtml::link(
-                "#{$comment->id}", $comment->getUrl($post), array(
+                "#{$comment->id}", $comment->getUrl(), array(
                     'class' => 'cid',
                     'title' => 'Permalink to this comment'
                 ));?>

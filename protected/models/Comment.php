@@ -143,13 +143,9 @@ class Comment extends CActiveRecord
 	 *
 	 * @return string the permalink URL for this comment
 	 */
-	public function getUrl($post = null)
+    public function getUrl()
 	{
-		if ($post === null) {
-			$post = $this->post;
-		}
-
-		return $post->url . '#c' . $this->id;
+        return array('comment/view', 'id' => $this->id);
 	}
 
 	/**
