@@ -33,5 +33,9 @@
 	<?php echo CHtml::encode($data->url); ?>
 	<br />
 
+    <b><?php echo CHtml::encode($data->getAttributeLabel('post_id')); ?>:</b>
+    <?php echo CHtml::link(CHtml::encode($data->post->title), array('post/view', 'id' => $data->post->id_tbl_post)); ?>
+    <br/>
+
 
 </div>
