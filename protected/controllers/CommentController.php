@@ -94,7 +94,7 @@ class CommentController extends Controller
         $model = new Comment();
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);
 
         $post = Yii::app()->request->getPost('Post');
 
@@ -114,6 +114,19 @@ class CommentController extends Controller
     }
 
     /**
+     * Performs the AJAX validation.
+     *
+     * @param Comment $model the model to be validated
+     */
+    protected function performAjaxValidation($model)
+    {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
+    /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
      *
@@ -124,7 +137,7 @@ class CommentController extends Controller
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);
 
         if (isset($_POST['Comment'])) {
             $model->attributes = $_POST['Comment'];
@@ -199,18 +212,5 @@ class CommentController extends Controller
         $comment = $this->loadModel($id);
         $comment->approve();
         $this->redirect(array('index'));
-    }
-
-    /**
-     * Performs the AJAX validation.
-     *
-     * @param Comment $model the model to be validated
-     */
-    protected function performAjaxValidation($model)
-    {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'comment-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
     }
 }
