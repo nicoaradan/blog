@@ -1,7 +1,7 @@
 <?php
 
 // uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
@@ -25,11 +25,17 @@ return array(
 			'password'=>'a',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1', '192.168.56.*'),
+            'generatorPaths' => array(
+                'bootstrap.gii',
+            ),
 		),
 	),
 
 	// application components
 	'components'=>array(
+        'bootstrap' => array(
+            'class' => 'bootstrap.components.Bootstrap',
+        ),
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
@@ -43,9 +49,6 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		/*'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),*/
 		// uncomment the following to use a MySQL database
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=blog',
@@ -85,4 +88,5 @@ return array(
 		'maxComments' => 10
 	),
 	'defaultController' => 'post',
+    'theme' => 'bootstrap'
 );
