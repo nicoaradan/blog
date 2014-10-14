@@ -3,7 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Posts',
+    'Posts',
 );
 
 $this->menu=array(
@@ -23,7 +23,10 @@ if (Yii::app()->user->name == 'demo') {
 <?php endif; ?>
 
 <?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-	'template' => '{items}{pager}'
+    'dataProvider' => $dataProvider,
+    'itemView' => '_view',
+    'template' => '{items}{pager}',
+    'itemsCssClass' => 'panel-default panel',
+    'htmlOptions' => array('id' => 'accordion', 'class' => 'panel-group'),
+    'emptyText' => 'No Post present'
 )); ?>
