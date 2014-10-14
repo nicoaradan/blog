@@ -2,6 +2,7 @@
     <?php if (($comment->post_id == $post->id_tbl_post) &&
         ($comment->status == Comment::STATUS_APPROVED)
     ): ?>
+
         <div class="comment" id="c<?php $comment->id; ?>">
 
             <?php echo CHtml::link(

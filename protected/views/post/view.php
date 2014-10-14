@@ -2,14 +2,14 @@
 /* @var $this PostController */
 /* @var $model Post */
 
-$this->breadcrumbs=array(
-	'Posts'=>array('index'),
-	$model->title,
+$this->breadcrumbs = array(
+    'Posts' => array('index'),
+    $model->title,
 );
 
-$this->menu=array(
-	array('label'=>'List Post', 'url'=>array('index')),
-	array('label'=>'Create Post', 'url'=>array('create')),
+$this->menu = array(
+    array('label' => 'List Post', 'url' => array('index')),
+    array('label' => 'Create Post', 'url' => array('create')),
     array('label' => 'Update Post', 'url' => array('update', 'id' => $model->id_tbl_post)),
     array(
         'label' => 'Delete Post',
@@ -19,7 +19,7 @@ $this->menu=array(
             'confirm' => 'Are you sure you want to delete this item?'
         )
     ),
-	array('label'=>'Manage Post', 'url'=>array('admin')),
+    array('label' => 'Manage Post', 'url' => array('admin')),
 );
 ?>
 
@@ -28,45 +28,53 @@ $this->menu=array(
 
 
 <?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
+    'data' => $model,
+    'attributes' => array(
         'id_tbl_post',
-		'title',
-		'content',
-		'tags',
+        'title',
+        'content',
+        'tags',
         array(
             'name' => 'status',
             'value' => $model->mapStatus->name
         ),
-		'create_time',
-		'update_time',
-	),
+        'create_time',
+        'update_time',
+    ),
 )); ?>
 
 <div id="comments">
-	<?php if ($model->commentCount >= 1): ?>
-		<h3>
-			<?php echo $model->commentCount . ' comment(s)'; ?>
-		</h3>
+    <?php if ($model->commentCount >= 1): ?>
+        <div class="panel-group" id="accordion">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#<?php echo $model->commentCount; ?>">
+                        <?php echo $model->commentCount . ' comment(s)'; ?>
+                    </a>
+                </h4>
+            </div>
 
-		<?php $this->renderPartial(
-			'_comments', array(
-				'post' => $model,
-				'comments' => $comments
-			)); ?>
-	<?php endif; ?>
+            <div id="<?php echo $model->commentCount; ?>" class="panel-collapse collapse">
+                <?php $this->renderPartial(
+                    '_comments', array(
+                        'post' => $model,
+                        'comments' => $comments
+                    )); ?>
+            </div>
+        </div>
+    <?php endif; ?>
 
-	<h3>Leave a comment</h3>
-	<?php if (Yii::app()->user->hasFlash('commentSubmitted')): ?>
-		<div class="flash-success">
-			<?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
-		</div>
-	<?php else: ?>
-		<?php $this->renderPartial(
-			'/comment/_form', array(
+    <h3>Leave a comment</h3>
+    <?php if (Yii::app()->user->hasFlash('commentSubmitted')): ?>
+        <div class="flash-success">
+            <?php echo Yii::app()->user->getFlash('commentSubmitted'); ?>
+        </div>
+    <?php else: ?>
+        <?php $this->renderPartial(
+            '/comment/_form', array(
                 'model' => new Comment(),
                 'post' => $model
-			)); ?>
+            )); ?>
 
-	<?php endif; ?>
+    <?php endif; ?>
 </div>
