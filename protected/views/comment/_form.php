@@ -20,25 +20,25 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+    <div class="input-group">
 		<?php echo $form->labelEx($model,'content'); ?>
 		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'content'); ?>
 	</div>
 
-	<div class="row">
+    <div class="input-group">
 		<?php echo $form->labelEx($model,'author'); ?>
 		<?php echo $form->textField($model,'author',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'author'); ?>
 	</div>
 
-	<div class="row">
+    <div class="input-group">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
+    <div class="input-group">
 		<?php echo $form->labelEx($model,'url'); ?>
 		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>200)); ?>
 		<?php echo $form->error($model,'url'); ?>
@@ -50,7 +50,7 @@
     }
     ?>
 
-	<div class="row buttons">
+    <div class="input-group buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn btn-success')); ?>
 	</div>
 
