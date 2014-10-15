@@ -168,7 +168,7 @@ class Comment extends CActiveRecord
 	/**
 	 * @return string the hyperlink display for the current comment's author
 	 */
-	public function getAuthorLink()
+    public function getAuthor()
 	{
 		if (!empty($this->url)) {
 			return CHtml::link(CHtml::encode($this->author), $this->url);
